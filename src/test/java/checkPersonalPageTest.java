@@ -14,7 +14,7 @@ import pageobject.PersonalPage;
 import static org.junit.Assert.assertEquals;
 import static webdrivercreator.WebDriverCreator.createWebDriver;
 
-public class checkPersonalPageTest {
+public class CheckPersonalPageTest {
 
     private WebDriver driver;
     Faker faker = new Faker();
@@ -36,7 +36,7 @@ public class checkPersonalPageTest {
     @DisplayName("Проверь переход по клику на «Личный кабинет»")
     public void successRegistrationTest() {
         User user = new User(name, email, password);
-        Response responseCreate = userClient.сreateUniqueUser(user);
+        Response responseCreate = userClient.createUniqueUser(user);
         accessToken = responseCreate.jsonPath().getString("accessToken");
 
         MainPage mainPage = new MainPage(driver);
@@ -55,7 +55,9 @@ public class checkPersonalPageTest {
     @DisplayName("Переход из личного кабинета в конструктор: Проверь переход по клику на «Конструктор»")
     public void checkConstructorTest() {
         User user = new User(name, email, password);
-        Response responseCreate = userClient.сreateUniqueUser(user);
+        Response responseCreate = userClient.createUniqueUser(user);
+        accessToken = responseCreate.jsonPath().getString("accessToken");
+
         MainPage mainPage = new MainPage(driver);
         LoginPage loginPage = new LoginPage(driver);
         PersonalPage personalPage = new PersonalPage(driver);
@@ -68,7 +70,7 @@ public class checkPersonalPageTest {
         personalPage.clickOnСonstructor();//здесь в личном кабинете мы кликаем на надпись Конструктор
         assertEquals(RestAssured.baseURI, driver.getCurrentUrl());//переход работает, если линка главная и есть надпись Создать бургер
         Assert.assertTrue(MainPage.isCreateBurgerBoxDisplayed());
-        accessToken = responseCreate.jsonPath().getString("accessToken");
+
     }
 
 
@@ -76,7 +78,8 @@ public class checkPersonalPageTest {
     @DisplayName("Переход из личного кабинета по клику на Лого")
     public void checkLogoTest() {
         User user = new User(name, email, password);
-        Response responseCreate = userClient.сreateUniqueUser(user);
+        Response responseCreate = userClient.createUniqueUser(user);
+        accessToken = responseCreate.jsonPath().getString("accessToken");
         MainPage mainPage = new MainPage(driver);
         LoginPage loginPage = new LoginPage(driver);
         PersonalPage personalPage = new PersonalPage(driver);
@@ -88,13 +91,13 @@ public class checkPersonalPageTest {
         personalPage.clickOnLogo();//здесь в личном кабинете мы кликаем на лого
         assertEquals(RestAssured.baseURI, driver.getCurrentUrl());
         Assert.assertTrue(MainPage.isCreateBurgerBoxDisplayed());//переход работает, если линка главная и есть надпись Создать буоргер
-        accessToken = responseCreate.jsonPath().getString("accessToken");
+
     }
 
     @After
     public void tearDown() {
         userClient.deleteUser(accessToken);
-        driver.quit();
+            driver.close();
     }
 
 }

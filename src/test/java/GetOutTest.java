@@ -37,7 +37,7 @@ public class GetOutTest {
     @DisplayName("Проверь выход по кнопке «Выйти» в личном кабинете")
     public void enterByPrivateBoxTest() {
         User user = new User(name, email, password);
-        Response responseCreate = userClient.сreateUniqueUser(user);
+        Response responseCreate = userClient.createUniqueUser(user);
         accessToken = responseCreate.jsonPath().getString("accessToken");
 
         MainPage mainPage = new MainPage(driver);

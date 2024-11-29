@@ -37,7 +37,7 @@ public class EnterBoxTest {
     @DisplayName("Вход по кнопке «Войти в аккаунт» на главной")
     public void enterByEnterBoxTest() {
         User user = new User(name, email, password);
-        Response responseCreate = userClient.сreateUniqueUser(user);
+        Response responseCreate = userClient.createUniqueUser(user);
 
         MainPage mainPage = new MainPage(driver);
         mainPage.openMainPageAndClickEnter();
@@ -55,7 +55,7 @@ public class EnterBoxTest {
     @DisplayName("Вход через кнопку «Личный кабинет»")
     public void enterByPrivateBoxTest() {
         User user = new User(name, email, password);
-        Response responseCreate = userClient.сreateUniqueUser(user);
+        Response responseCreate = userClient.createUniqueUser(user);
         accessToken = responseCreate.jsonPath().getString("accessToken");
 
         MainPage mainPage = new MainPage(driver);
@@ -73,7 +73,7 @@ public class EnterBoxTest {
     @DisplayName("Вход  через кнопку в форме регистрации")
     public void enterByEnterBoxFromRegPageTest() {
         User user = new User(name, email, password);
-        Response responseCreate = userClient.сreateUniqueUser(user);
+        Response responseCreate = userClient.createUniqueUser(user);
         accessToken = responseCreate.jsonPath().getString("accessToken");
 
         RegistrationPage registrationPage = new RegistrationPage(driver);
@@ -93,7 +93,7 @@ public class EnterBoxTest {
     @DisplayName("Вход через кнопку в форме восстановления пароля")
     public void enterByRecoverPasswordTest() {
         User user = new User(name, email, password);
-        Response responseCreate = userClient.сreateUniqueUser(user);
+        Response responseCreate = userClient.createUniqueUser(user);
         accessToken = responseCreate.jsonPath().getString("accessToken");
 
         ForgotPasswordPage forgotPasswordPage = new ForgotPasswordPage(driver);

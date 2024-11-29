@@ -20,7 +20,7 @@ public class MainPage {
     private static final String mainPageUrl = "https://stellarburgers.nomoreparties.site/";
     private static final By EnterBoxOnMainPage = By.xpath(".//*[@class='button_button__33qZ0 button_button_type_primary__1O7Bx button_button_size_large__G21Vg']");
     private static final By OrderButton = By.xpath(".//*[@class='button_button__33qZ0 button_button_type_primary__1O7Bx button_button_size_large__G21Vg']");
-    private static final By PrivateBox = By.xpath(".//*[text()='Личный Кабинет']");
+    private static final By PrivateBox = By.cssSelector("a[href='/account']");
     private static final By innerTable = By.xpath(".//*[@class='text text_type_main-medium mb-6 mt-10' and text()='Начинки']");
     private static final By SauceTable = By.xpath(".//*[@class='text text_type_main-medium mb-6 mt-10' and text()='Соусы']");
     private static final By Inner = By.xpath(".//*[@class='text text_type_main-default' and text()='Начинки']");
@@ -78,7 +78,7 @@ public class MainPage {
             "Краторная булка N-200i";
 
     @Step("Открываем главную страницу")
-    public  MainPage openMainPage() {
+    public MainPage openMainPage() {
         driver.get(mainPageUrl);
         return this;
     }
@@ -198,6 +198,7 @@ public class MainPage {
         clickPrivateBox();
         return this;
     }
+
     @Step("Видна ли кнопка заказ")
     public static boolean isOrderButtonDisplayed() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));

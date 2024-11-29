@@ -3,7 +3,10 @@ import io.restassured.RestAssured;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import pageobject.MainPage;
 
 
@@ -21,6 +24,7 @@ public class ConstructorTest {
         driver = createWebDriver();
         driver.manage().window().maximize();
     }
+
 
     @Test
     @DisplayName("Раздел «Конструктор»: Проверь, что работают переходы к разделам: «Начинки»")
